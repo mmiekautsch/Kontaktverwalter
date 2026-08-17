@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Personenverwaltung_NET8_WPF_EF_MSSQL/Personenverwaltung
+/.github
