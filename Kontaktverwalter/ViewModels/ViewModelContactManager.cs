@@ -50,8 +50,10 @@ namespace Kontaktverwalter.ViewModels
             }
             _allCurrentContacts = [.. _allCurrentContacts.OrderBy(c => c.LastName).ThenBy(c => c.FirstName)];
 
+            // adding contacts individually to the observable collection to avoid flickering in the UI
             foreach (ContactDto contact in _allCurrentContacts)
             {
+                // only add the contact if it is not already in the collection
                 if (!ContactInfoItems.Any(item => item.Id == contact.IdPerson))
                 {
                     ContactInfoItems.Add(new ContactInfoItem() { Id = contact.IdPerson, FirstName = contact.FirstName, LastName = contact.LastName });

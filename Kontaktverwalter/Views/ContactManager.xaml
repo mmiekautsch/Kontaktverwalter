@@ -15,7 +15,8 @@
         <StackPanel Orientation="Horizontal" Margin="5,10">
             <Label Content="Name:" VerticalAlignment="Center"/>
             <TextBox x:Name="txtNameSearch" Width="200" Height="20"
-                     Text="{Binding SelectedValues.txtNameSearchContent, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+                     Text="{Binding CurrentValues.txtNameSearchContent, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                     Style="{StaticResource ValidatingCell}"/>
             <Button x:Name="btnStartSearch" Content="Suchen" HorizontalAlignment="Left" Margin="5,0,0,0" Width="75" Height="20" 
                     Command="{Binding SearchCommand}"/>
         </StackPanel>
@@ -23,20 +24,13 @@
         <DataGrid x:Name="dataGrid_ContactView" Grid.Row="1" Margin="5,0,5,5"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" 
                   HeadersVisibility="Column" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
-                  SelectionUnit="CellOrRowHeader" SelectionMode="Extended">
+                  SelectionUnit="CellOrRowHeader" SelectionMode="Extended"
+                  MouseDoubleClick="dataGrid_ContactView_MouseDoubleClick">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nachname" Width="*"
-                                    Binding="{Binding LastName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
-                                    EditingElementStyle="{StaticResource ValidatingCell}"/>
-                <DataGridTextColumn Header="Vorname" Width="*"
-                                    Binding="{Binding FirstName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
-                                    EditingElementStyle="{StaticResource ValidatingCell}"/>
-                <!--<DataGridTextColumn Header="Geboren am" Binding="{Binding DateOfBirth, Mode=OneWay}" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn Header="PLZ" Binding="{Binding PostalCode, Mode=OneWay}" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn Header="Ort" Binding="{Binding City, Mode=OneWay}" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn Header="Straße" Binding="{Binding StreetName, Mode=OneWay}" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn Header="HausNr." Binding="{Binding StreetNumber, Mode=OneWay}" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn Header="Tel." Binding="{Binding PhoneNumber, Mode=OneWay}" IsReadOnly="True" Width="*"/>-->
+                <DataGridTextColumn Header="Nachname" Width="*" IsReadOnly="True"
+                                    Binding="{Binding LastName}" />
+                <DataGridTextColumn Header="Vorname" Width="*" IsReadOnly="True"
+                                    Binding="{Binding FirstName}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

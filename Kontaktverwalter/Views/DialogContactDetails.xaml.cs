@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kontaktverwalter.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,22 @@ namespace Kontaktverwalter.Views
     /// </summary>
     public partial class DialogContactDetails : Window
     {
-        public DialogContactDetails()
+        private readonly ViewModelDialogContactDetails _viewModel;
+
+        public DialogContactDetails(long contactId)
         {
             InitializeComponent();
+            _viewModel = new ViewModelDialogContactDetails();
+            DataContext = _viewModel;
+            _ = _viewModel.LoadContactDetailsAsync(contactId);
+            dataGrid_Addresses.ItemsSource = _viewModel.Addresses;
+            dataGrid_PhoneNumbers.ItemsSource = _viewModel.PhoneContacts;
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+            Close();
         }
     }
 }

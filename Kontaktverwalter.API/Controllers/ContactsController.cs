@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Kontaktverwalter.API.DBModel;
 using Kontaktverwalter.Shared.DTO;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kontaktverwalter.API.Controllers
 {
@@ -46,7 +46,7 @@ namespace Kontaktverwalter.API.Controllers
         {
             _logger.LogInformation("Retrieving contact with query: {Query}", query);
             var contacts = await _context.ViewFullContactInfos
-                .Where(c => string.Concat(c.FirstName, " ", c.LastName).Contains(query))
+                .Where(c => (c.FirstName + " " + c.LastName).Contains(query))
                 .Select(c => new ContactDto
                 {
                     IdPerson = c.IdPerson,

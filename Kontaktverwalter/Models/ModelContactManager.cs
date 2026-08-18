@@ -63,7 +63,7 @@ namespace Kontaktverwalter.Models
     /// <summary>
     /// Represents a contact information item with first and last name.
     /// </summary>
-    class ContactInfoItem : ObservableObject, IDataErrorInfo
+    class ContactInfoItem : ObservableObject
     {
         private string? _firstName;
         private string? _lastName;
@@ -94,57 +94,6 @@ namespace Kontaktverwalter.Models
                     RaisePropertyChangedEvent();
                 }
             }
-        }
-
-        string IDataErrorInfo.Error
-        {
-            get
-            {
-                return ValidateFirstName()
-                    ?? ValidateLastName();
-            }
-        }
-
-        string IDataErrorInfo.this[string columnName]
-        {
-            get
-            {
-                switch (columnName)
-                {
-                    case nameof(FirstName): return ValidateFirstName();
-                    case nameof(LastName): return ValidateLastName();
-                    default:
-                        break;
-                }
-
-                return null;
-            }
-        }
-
-        private string? ValidateFirstName()
-        {
-            if (string.IsNullOrWhiteSpace(FirstName))
-            {
-                return "First name cannot be empty.";
-            }
-            if (FirstName.Any(char.IsDigit))
-            {
-                return "First name cannot contain digits.";
-            }
-            return null;
-        }
-
-        private string? ValidateLastName()
-        {
-            if (string.IsNullOrWhiteSpace(LastName))
-            {
-                return "Last name cannot be empty.";
-            }
-            if (LastName.Any(char.IsDigit))
-            {
-                return "Last name cannot contain digits.";
-            }
-            return null;
         }
     }
 }

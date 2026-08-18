@@ -24,9 +24,15 @@ namespace Kontaktverwalter.Shared
             return await ReadResponseAsync<List<ContactDto>>(response);
         }
 
-        public async Task UpdateContactAsync(long id, UpdateContactDto contact)
+        public async Task<ContactDetailDto> GetContactDetailsAsync(long id)
         {
-            var response = await _httpClient.PostAsJsonAsync($"api/contacts/update/{id}", contact);
+            var response = await _httpClient.GetAsync($"api/contacts/details/{id}");
+            return await ReadResponseAsync<ContactDetailDto>(response);
+        }
+
+        public async Task UpdateContactAsync(UpdateContactDto contact)
+        {
+            var response = await _httpClient.PostAsJsonAsync($"api/contacts/update/{contact.Id}", contact);
             response.EnsureSuccessStatusCode();
         }
 
