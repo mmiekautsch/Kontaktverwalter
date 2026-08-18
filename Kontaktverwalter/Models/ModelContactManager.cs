@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Kontaktverwalter.Models
 {
+    /// <summary>
+    /// Class representing the currently selected values in the contact manager
+    /// </summary>
     class SelectedValuesContactManager : ObservableObject, IDataErrorInfo
     {
         private string? _txtNameSearchContent;
@@ -47,20 +50,25 @@ namespace Kontaktverwalter.Models
             }
         }
 
-        public string? ValidateNameSearchContent()
+        private string? ValidateNameSearchContent()
         {
-            if (string.IsNullOrWhiteSpace(txtNameSearchContent))
+            if (txtNameSearchContent != null && txtNameSearchContent.Any(char.IsDigit))
             {
-                return "Search content is required.";
+                return "Search content cannot contain digits.";
             }
             return null;
         }
     }
 
+    /// <summary>
+    /// Represents a contact information item with first and last name.
+    /// </summary>
     class ContactInfoItem : ObservableObject, IDataErrorInfo
     {
         private string? _firstName;
         private string? _lastName;
+
+        public long Id { get; set; } // just for identification purposes, not used in the UI
 
         public string? FirstName
         {
@@ -113,20 +121,28 @@ namespace Kontaktverwalter.Models
             }
         }
 
-        public string? ValidateFirstName()
+        private string? ValidateFirstName()
         {
             if (string.IsNullOrWhiteSpace(FirstName))
             {
-                return "First name is required.";
+                return "First name cannot be empty.";
+            }
+            if (FirstName.Any(char.IsDigit))
+            {
+                return "First name cannot contain digits.";
             }
             return null;
         }
 
-        public string? ValidateLastName()
+        private string? ValidateLastName()
         {
             if (string.IsNullOrWhiteSpace(LastName))
             {
-                return "Last name is required.";
+                return "Last name cannot be empty.";
+            }
+            if (LastName.Any(char.IsDigit))
+            {
+                return "Last name cannot contain digits.";
             }
             return null;
         }

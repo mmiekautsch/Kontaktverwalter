@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Kontaktverwalter.Views
 {
     /// <summary>
-    /// Interaktionslogik für DialogContactDetailsWindow.xaml
+    /// Interaction logic for DialogContactDetails.xaml
     /// </summary>
-    public partial class DialogContactDetailsWindow : Window
+    public partial class DialogContactDetails : Window
     {
-        public DialogContactDetailsWindow()
+        public DialogContactDetails()
         {
             InitializeComponent();
         }

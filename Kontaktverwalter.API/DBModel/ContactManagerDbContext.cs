@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace Kontaktverwalter.DBModel;
+namespace Kontaktverwalter.API.DBModel;
 
 public partial class ContactManagerDbContext : DbContext
 {

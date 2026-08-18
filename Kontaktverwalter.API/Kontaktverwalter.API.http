@@ -1,0 +1,9 @@
+@Kontaktverwalter.API_HostAddress = http://localhost:1337
+
+### Get all contacts
+GET {{Kontaktverwalter.API_HostAddress}}/api/contacts/list
+Accept: application/json
+
+### Search for a contact
+GET {{Kontaktverwalter.API_HostAddress}}/api/contacts/John
+Accept: application/json

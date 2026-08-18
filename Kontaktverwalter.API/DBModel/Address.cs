@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Kontaktverwalter.DBModel;
+namespace Kontaktverwalter.API.DBModel;
 
 public partial class Address
 {
