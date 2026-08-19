@@ -8,17 +8,17 @@ namespace Kontaktverwalter.API
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllers();
             builder.Services.AddProblemDetails();
             builder.Services.AddDbContext<ContactManagerDbContext>(options =>
                 options.UseSqlServer(
                     builder.Configuration.GetConnectionString("ContactManagerDBConnection")
-                    ?? throw new InvalidOperationException("ConnectionStrings:ContactManagerDBConnection fehlt."),
+                        ?? throw new InvalidOperationException("ConnectionStrings:ContactManagerDBConnection fehlt."),
                     sql => sql.EnableRetryOnFailure()));
 
-            var app = builder.Build();
+            WebApplication app = builder.Build();
 
             if (app.Environment.IsDevelopment())
             {

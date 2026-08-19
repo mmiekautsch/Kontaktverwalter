@@ -29,7 +29,7 @@ namespace Kontaktverwalter.Views
             InitializeComponent();
             _viewModel = new ViewModelDialogContactDetails();
             DataContext = _viewModel;
-            _ = _viewModel.LoadContactDetailsAsync(contactId);
+            _ = _viewModel.LoadContactDetailsAsync(contactId); // maybe .Wait() here, but its better to let it load in the background for UI responsiveness
             dataGrid_Addresses.ItemsSource = _viewModel.Addresses;
             dataGrid_PhoneNumbers.ItemsSource = _viewModel.PhoneContacts;
         }

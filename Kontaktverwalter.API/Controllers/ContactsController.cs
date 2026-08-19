@@ -85,7 +85,6 @@ namespace Kontaktverwalter.API.Controllers
             return Ok();
         }
 
-        // get contact by id fehlt noch
         [HttpGet("details/{id}")]
         public async Task<IActionResult> GetContactDetails(long id)
         {
@@ -96,14 +95,14 @@ namespace Kontaktverwalter.API.Controllers
             }
 
             // get addresses and phone contacts for the person via navigation properties
-            var contactInfo = _context.People
+            Person contactInfo = _context.People
                 .Include(p => p.Addresses)
                 .Include(p => p.PhoneContacts)
                 .Where(p => p.IdPerson == id)
                 .First();
 
-            // convert to ContactDetailsDto
-            var contactDetails = new ContactDetailsDto()
+            // convert to DTO
+            ContactDetailsDto contactDetails = new()
             {
                 IdPerson = contactInfo.IdPerson,
                 FirstName = contactInfo.FirstName,

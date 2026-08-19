@@ -6,7 +6,7 @@ namespace Kontaktverwalter.Shared.DTO
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
         public DateOnly DateOfBirth { get; set; }
-        public List<AddressDto> Addresses { get; set; } = new();
-        public List<PhoneContactDto> PhoneContacts { get; set; } = new();
+        public List<AddressDto> Addresses { get; set; } = [];
+        public List<PhoneContactDto> PhoneContacts { get; set; } = [];
     }
 }

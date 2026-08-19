@@ -1,1 +1,0 @@
-﻿Scaffold-DbContext "Server=localhost;Database=ContactManagerDB;User Id=ContactManagerDB_rw;Password=ContactManagerDB_rw;TrustServerCertificate=True" -Provider Microsoft.EntityFrameworkCore.SqlServer -OutputDir DBModel -Force -NoOnConfiguring

@@ -9,6 +9,7 @@ namespace Kontaktverwalter.API.Middleware
         private readonly RequestDelegate _next;
         private readonly ILogger<GlobalExceptionHandlerMiddleware> _logger;
 
+        // following the middleware pattern of accepting a RequestDelegate and logger in the constructor
         public GlobalExceptionHandlerMiddleware(RequestDelegate next, ILogger<GlobalExceptionHandlerMiddleware> logger)
         {
             _next = next;
@@ -71,7 +72,7 @@ namespace Kontaktverwalter.API.Middleware
 
     public class ErrorResponse
     {
-        public string Message { get; set; }
-        public string TraceId { get; set; }
+        public string Message { get; set; } = null!;
+        public string TraceId { get; set; } = null!;
     }
 }

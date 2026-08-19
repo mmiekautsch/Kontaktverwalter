@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "Run WPF+API",
+    "Projects": [
+      {
+        "Path": "Kontaktverwalter\\Kontaktverwalter.csproj",
+        "Action": "Start",
+        "DebugTarget": "Kontaktverwalter"
+      },
+      {
+        "Path": "Kontaktverwalter.API\\Kontaktverwalter.API.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      }
+    ]
+  }
+]

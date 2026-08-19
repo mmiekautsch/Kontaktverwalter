@@ -70,28 +70,21 @@ namespace Kontaktverwalter.ViewModels
 
         private bool CanSave()
         {
-            return ((IDataErrorInfo)CurrentValues).Error == null
+            return ((IDataErrorInfo)CurrentValues).Error == null // Ensure there are no validation errors
                 && _contactDetail != null;
         }
 
         private async Task UpdateContactNameAsync()
         {
-            try
+            UpdateContactDto updateDto = new()
             {
-                var updateDto = new UpdateContactDto
-                {
-                    Id = _contactDetail!.IdPerson,
-                    FirstName = CurrentValues.FirstName!,
-                    LastName = CurrentValues.LastName!
-                };
+                Id = _contactDetail!.IdPerson,
+                FirstName = CurrentValues.FirstName!,
+                LastName = CurrentValues.LastName!
+            };
 
-                await _apiClient.UpdateContactAsync(updateDto);
-                _ = MessageBox.Show("Kontakt erfolgreich aktualisiert.", "Erfolg");
-            }
-            catch (Exception ex)
-            {
-                _ = MessageBox.Show($"Fehler beim Aktualisieren des Kontakts: {ex.Message}", "Fehler");
-            }
+            await _apiClient.UpdateContactAsync(updateDto);
+            _ = MessageBox.Show("Kontakt erfolgreich aktualisiert.", "Erfolg");
         }
     }
 }
