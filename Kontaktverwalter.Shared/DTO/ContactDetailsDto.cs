@@ -1,6 +1,6 @@
 namespace Kontaktverwalter.Shared.DTO
 {
-    public class ContactDetailDto
+    public class ContactDetailsDto
     {
         public long IdPerson { get; set; }
         public string FirstName { get; set; } = null!;

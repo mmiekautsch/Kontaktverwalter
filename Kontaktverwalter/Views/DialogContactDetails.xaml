@@ -45,7 +45,7 @@
                         Content="Speichern" Width="75" Height="24" 
                         Command="{Binding SaveCommand}" Margin="0,0,10,5"/>
 
-                <TextBlock Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" 
+                <TextBlock Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1"  Margin="5,0"
                            FontSize="12" Foreground="#666666" 
                            Text="{Binding CurrentValues.DateOfBirth, StringFormat='Geboren: {0}'}"/>
             </Grid>

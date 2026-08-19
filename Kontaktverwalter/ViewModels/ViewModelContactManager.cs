@@ -28,7 +28,7 @@ namespace Kontaktverwalter.ViewModels
         {
             ContactInfoItems = [];
             CurrentValues = new();
-            _apiClient = new();
+            _apiClient = ContactApiClient.Instance;
             _allCurrentContacts = [];
 
             SearchCommand = new AsyncRelayCommand(

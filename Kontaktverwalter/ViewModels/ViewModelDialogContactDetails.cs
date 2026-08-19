@@ -14,7 +14,7 @@ namespace Kontaktverwalter.ViewModels
     public class ViewModelDialogContactDetails
     {
         private readonly ContactApiClient _apiClient;
-        private ContactDetailDto? _contactDetail;
+        private ContactDetailsDto? _contactDetail;
 
         public SelectedValuesContactDetails CurrentValues { get; }
         public ObservableCollection<AddressDto> Addresses { get; private set; }
@@ -23,7 +23,7 @@ namespace Kontaktverwalter.ViewModels
 
         public ViewModelDialogContactDetails()
         {
-            _apiClient = new();
+            _apiClient = ContactApiClient.Instance;
             CurrentValues = new();
             Addresses = [];
             PhoneContacts = [];
@@ -81,16 +81,16 @@ namespace Kontaktverwalter.ViewModels
                 var updateDto = new UpdateContactDto
                 {
                     Id = _contactDetail!.IdPerson,
-                    FirstName = CurrentValues.FirstName,
-                    LastName = CurrentValues.LastName
+                    FirstName = CurrentValues.FirstName!,
+                    LastName = CurrentValues.LastName!
                 };
 
                 await _apiClient.UpdateContactAsync(updateDto);
-                MessageBox.Show("Kontakt erfolgreich aktualisiert.", "Erfolg");
+                _ = MessageBox.Show("Kontakt erfolgreich aktualisiert.", "Erfolg");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Fehler beim Aktualisieren des Kontakts: {ex.Message}", "Fehler");
+                _ = MessageBox.Show($"Fehler beim Aktualisieren des Kontakts: {ex.Message}", "Fehler");
             }
         }
     }

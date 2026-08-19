@@ -84,5 +84,48 @@ namespace Kontaktverwalter.API.Controllers
 
             return Ok();
         }
+
+        // get contact by id fehlt noch
+        [HttpGet("details/{id}")]
+        public async Task<IActionResult> GetContactDetails(long id)
+        {
+            _logger.LogInformation("Retrieving contact details for ID: {Id}", id);
+            if (await _context.People.FindAsync(id) == null)
+            {
+                return NotFound();
+            }
+
+            // get addresses and phone contacts for the person via navigation properties
+            var contactInfo = _context.People
+                .Include(p => p.Addresses)
+                .Include(p => p.PhoneContacts)
+                .Where(p => p.IdPerson == id)
+                .First();
+
+            // convert to ContactDetailsDto
+            var contactDetails = new ContactDetailsDto()
+            {
+                IdPerson = contactInfo.IdPerson,
+                FirstName = contactInfo.FirstName,
+                LastName = contactInfo.LastName,
+                DateOfBirth = contactInfo.DateOfBirth,
+                Addresses = [.. contactInfo.Addresses.Select(a => new AddressDto
+                {
+                    IdAddress = a.IdAddress,
+                    StreetName = a.StreetName,
+                    StreetNumber = a.StreetNumber,
+                    PostalCode = a.PostalCode,
+                    City = a.City,
+                    Country = a.Country
+                })],
+                PhoneContacts = [.. contactInfo.PhoneContacts.Select(p => new PhoneContactDto
+                {
+                    IdPhoneContact = p.IdPhoneContact,
+                    PhoneNumber = p.PhoneNumber,
+                    Type = p.Type
+                })]
+            };
+            return Ok(contactDetails);
+        }
     }
 }

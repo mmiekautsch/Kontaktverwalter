@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,11 +14,11 @@ namespace Kontaktverwalter.Models
     /// </summary>
     public class SelectedValuesContactDetails : ObservableObject, IDataErrorInfo
     {
-        private string _firstName = string.Empty;
-        private string _lastName = string.Empty;
-        private string _dateOfBirth = string.Empty;
+        private string? _firstName;
+        private string? _lastName;
+        private string? _dateOfBirth;
 
-        public string FirstName
+        public string? FirstName
         {
             get => _firstName;
             set
@@ -30,7 +31,7 @@ namespace Kontaktverwalter.Models
             }
         }
 
-        public string LastName
+        public string? LastName
         {
             get => _lastName;
             set
@@ -43,7 +44,7 @@ namespace Kontaktverwalter.Models
             }
         }
 
-        public string DateOfBirth
+        public string? DateOfBirth
         {
             get => _dateOfBirth;
             set
@@ -83,6 +84,7 @@ namespace Kontaktverwalter.Models
 
         private string? ValidateFirstName()
         {
+            if (FirstName == null) return null;
             if (string.IsNullOrWhiteSpace(FirstName))
             {
                 return "First name cannot be empty.";
@@ -96,6 +98,7 @@ namespace Kontaktverwalter.Models
 
         private string? ValidateLastName()
         {
+            if (LastName == null) return null;
             if (string.IsNullOrWhiteSpace(LastName))
             {
                 return "Last name cannot be empty.";
